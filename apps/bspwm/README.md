@@ -1,7 +1,7 @@
 ## BSPWM talon
 
 This integrates the bspc control grammar for the [bspwm window
-manager](https://github.come/baskerville/bspwm) with talon.
+manager](https://github.com/baskerville/bspwm) with talon.
 
 Enable it by adding the `tag(): user.bspwm` to one of your .talon files, e.g.
 ```talon
@@ -56,7 +56,7 @@ If you wish to customise these, you will have to redeclare the whole lists or ru
 in a python file. For example:
 ```python
 from talon import Context
-ctx = Context(")"
+ctx = Context()
 # Ensure your file takes prescedence over the default one
 ctx.matches = """
 os: linux
@@ -65,6 +65,6 @@ language: en
 
 # Name is the name in bspwm.py, prefixed with "user.bspwm_"
 ctx.lists["user.bspwm_to_desktop"] = {
-  ""meander" in the direction of space": "--to-desktop",
+  "meander in the direction of space": "--to-desktop",
 }
 ```
