@@ -115,17 +115,17 @@ BSPWM_CAPTURE_RULES = {
 
     "resize_command": "{resize} {resize_direction} <number> <number>",
 
-    "node_sel": "[<node_sel>] <node_descriptor> [<node_modifier>]",
+    "node_sel": "<node_descriptor> [<node_modifier>]",
 
-    "desktop_sel": "[<desktop_sel>] <desktop_descriptor> [<desktop_modifier>]",
+    "desktop_sel": "<desktop_descriptor> [<desktop_modifier>]",
 
-    "monitor_sel": "[<monitor_sel>] <monitor_descriptor> [<monitor_modifier>]",
+    "monitor_sel": "<monitor_descriptor> [<monitor_modifier>]",
 
     "node_descriptor": "<basic_descriptor> | {biggest} | {smallest}",
 
-    "desktop_descriptor": "<desktop_cycle_descriptor> | <number>",
+    "desktop_descriptor": "<desktop_cycle_descriptor> | <selector_number>",
 
-    "monitor_descriptor": "<basic_descriptor> | {primary} | <number>",
+    "monitor_descriptor": "<basic_descriptor> | {primary} | <selector_number>",
 
     "node_modifier": "[{not}] {common_modifier}",
 
@@ -323,13 +323,17 @@ create_terminals("common_modifier", {
 for name, rule in BSPWM_CAPTURE_RULES.items():
     create_capture(name, rule)
 
-# Have to define this separately because it isn't referencing an internal capture
+# Have to define these separately because it isn't referencing an internal capture
 @mod.capture(rule="<digits>")
 def bspwm_number(m) -> str:
     "digits"
     return m
 
-# Have to define this separately because it isn't referencing an internal capture
+@mod.capture(rule="<digits>")
+def bspwm_selector_number(m) -> str:
+    "digits"
+    return f"^{m}"
+
 @mod.capture(rule="<user.text>")
 def bspwm_text(m) -> str:
     "user text"
