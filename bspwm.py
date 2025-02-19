@@ -99,7 +99,7 @@ BSPWM_CAPTURE_RULES = {
     "monitor_actions": """
     {focus} [<monitor_sel>] |
     {swap} <desktop_sel> [{follow}] |
-    {add_desktops} {space} |
+    <add_desktop> |
     {remove}
     """,
 
@@ -211,7 +211,7 @@ create_terminals("close", {"close": "--close"})
 create_terminals("kill", {"kill": "--kill"})
 create_terminals("layout", {"layout": "--layout"})
 create_terminals("remove", {"remove": "--remove"})
-create_terminals("add_desktops", {"add desktops": "--add-desktops"})
+create_terminals("add_desktops", {"add desktop": "--add-desktops"})
 create_terminals("dump_state", {"dump state": "--dump-state"})
 create_terminals("load_state", {"load state": "--load-state"})
 create_terminals("adopt_orphans", {"adopt orphans": "--adopt-orphans"})
@@ -334,6 +334,15 @@ def bspwm_selector_number(m) -> str:
     "digits"
     return f"^{m}"
 
+@mod.capture(rule="{user.bspwm_add_desktops} [<user.text> | <number>]")
+def bspwm_add_desktop(m) -> str:
+    "add desktop with optional text or number for name, else blank space"
+    if len(m) > 1:
+        name = m[1]
+    else:
+        name = " "
+    return f'--add-desktops "{name}"'
+
 @mod.capture(rule="<user.text>")
 def bspwm_text(m) -> str:
     "user text"
@@ -342,11 +351,12 @@ def bspwm_text(m) -> str:
 
 
 def bspc_command(*args: tuple[str]):
-    args = [arg for part in args for arg in part.split() if arg]
-    result = subprocess.run(["bspc", *args], capture_output=True, text=True)
+    # args = [arg for part in args for arg in part.split() if arg]
+    print(args)
+    to_run = ["bspc " + " ".join(args)]
+    result = subprocess.run(to_run, shell=True, capture_output=True, text=True)
     if result.stderr:
-        argstr =" ".join(args)
-        print(f"BSPC error running `bspc {argstr}`: {result.stderr}")
+        print(f"BSPC error running `bspc {to_run}`: {result.stderr}")
     # else:
     #     print(f"Output: {result.stdout}")
 
