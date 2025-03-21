@@ -170,6 +170,7 @@ create_terminals("node", {
 create_terminals("desktop", {
     "desktop": "desktop",
     "desk": "desktop",
+    "deck": "desktop",
     "workspace": "desktop",
 })
 create_terminals("monitor", {
