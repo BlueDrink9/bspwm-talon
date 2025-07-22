@@ -170,6 +170,7 @@ create_terminals("node", {
 create_terminals("desktop", {
     "desktop": "desktop",
     "desk": "desktop",
+    "ditch": "desktop",
     "deck": "desktop",
     "workspace": "desktop",
 })
@@ -183,6 +184,8 @@ create_terminals("wm", {"wm": "wm"})
 create_terminals("to_desktop", {
     "to desktop": "--to-desktop",
     "to desk": "--to-desktop",
+    "to deck": "--to-desktop",
+    "to ditch": "--to-desktop",
     "to workspace": "--to-desktop",
     "send": "--to-desktop",
 })

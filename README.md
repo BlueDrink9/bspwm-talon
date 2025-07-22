@@ -23,6 +23,8 @@ Mappings to replace works, e.g. to say "window" in place of "node", can be seen 
     "window": "node",
     "desktop": "desktop",
     "desk": "desktop",
+    "deck": "desktop",
+    "ditch": "desktop",
     "workspace": "desktop",
     "monitor": "monitor",
     "screen": "monitor",
